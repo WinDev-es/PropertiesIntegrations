@@ -1,8 +1,5 @@
 ﻿using Context.Data;
-using Context.Entities;
 using DataTransferObjets.Entities;
-
-//using DataTransferObjets.Entities;
 using Repository.GenericRepository.Implentations;
 using Repository.SpecificRepository.Interfaces;
 

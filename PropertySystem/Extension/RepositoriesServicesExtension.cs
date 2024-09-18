@@ -13,9 +13,8 @@ namespace PropertySystem.Extension
         {
             // Configura el DbContext
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(ConnectionChain)); // O usa otro proveedor si es necesario
+                options.UseSqlServer(ConnectionChain));
 
-            // Registra las fábricas de servicios
             services.AddScoped<IUnitOfWork>(provider =>
                 new UnitOfWork(provider.GetRequiredService<ApplicationDbContext>()));
 
@@ -24,9 +23,6 @@ namespace PropertySystem.Extension
 
             services.AddScoped<IPropertyImageRepository>(provider =>
                 new PropertyImageRepository(provider.GetRequiredService<ApplicationDbContext>()));
-
-            //services.AddScoped<IOwnerRepository>(provider =>
-            //    new OwnerRepository(provider.GetRequiredService<ApplicationDbContext>()));
         }
     }
 }

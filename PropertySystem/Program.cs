@@ -24,28 +24,27 @@ builder.Services.AddControllers();
 var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseOpenApi(); // Servir el archivo OpenAPI/Swagger especificado
+app.UseOpenApi();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    app.UseSwagger();  // Este genera el archivo swagger.json
+    app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        // Definir el endpoint de Swagger
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Properties Integrations.PropertySystem");
     });
 }
 else
 {
-    app.UseExceptionHandler("/Error"); // Opcional: página de errores genérica
+    app.UseExceptionHandler("/Error");
     app.UseMiddleware<ExceptionHandlingMiddleware>();
     app.UseAuthentication();
     app.UseAuthorization();
-    app.UseOpenApi(); // Servir el archivo OpenAPI/Swagger especificado
+    app.UseOpenApi();
     app.UseSwaggerUi(settings =>
     {
-        settings.DefaultModelsExpandDepth = 1; // Cambia según tu configuración
+        settings.DefaultModelsExpandDepth = 1; 
         settings.OAuth2Client = new OAuth2ClientSettings
         {
             ClientId = "5890ac83-afea-4d39-8c1a-51f8fa72f348",

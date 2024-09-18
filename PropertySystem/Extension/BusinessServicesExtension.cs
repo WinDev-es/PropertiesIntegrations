@@ -7,15 +7,5 @@ public static class BusinessServicesExtension
     {
         services.AddScoped<IPropertyService, PropertyService>();
         services.AddScoped<IPropertyImageService, PropertyImageService>();
-
-
-        //var assemblyBusinessLogic = AppDomain.CurrentDomain.Load("BusinessLogic");
-
-        //services.Scan(scan => scan
-        //    .FromAssemblies(assemblyBusinessLogic)
-        //    .AddClasses(classes => classes
-        //        .Where(type => type.Name.Contains("Contracts"))) // Filtra las clases por nombre
-        //    .AsImplementedInterfaces() // Registra las clases como sus interfaces
-        //    .WithTransientLifetime()); // Configura el ciclo de vida como Transient
     }
 }

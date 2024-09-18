@@ -19,7 +19,6 @@ namespace Context.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // Aplicar las configuraciones personalizadas de las entidades
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Specialized;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace Repository.GenericRepository.Interfaces
 {

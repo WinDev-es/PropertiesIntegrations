@@ -1,7 +1,5 @@
 ﻿using DataTransferObjects.Dto.System;
 using DataTransferObjets.Configuration;
-using NSwag;
-using NSwag.Generation.Processors.Security;
 
 namespace PropertySystem.Extension
 {
@@ -32,34 +30,7 @@ namespace PropertySystem.Extension
                     " properties according to specific criteria"
                 });
 
-                // Configuraciones adicionales si necesitas agregar seguridad o más detalles en tu API
-                // c.AddSecurityDefinition(...);
-                // c.AddSecurityRequirement(...);
             });
-            //services.AddOpenApiDocument(document =>
-            //{
-            //    document.Title = "System Property APIS MicroService";
-            //    document.Description = "Set of end points exposed as tests.";
-            //    document.Version = "1.0";
-
-            //    document.AddSecurity("bearer", Enumerable.Empty<string>(), new OpenApiSecurityScheme
-            //    {
-            //        Type = OpenApiSecuritySchemeType.OAuth2,
-            //        Description = "B2C authentication",
-            //        Flow = OpenApiOAuth2Flow.Implicit,
-            //        Flows = new OpenApiOAuthFlows()
-            //        {
-            //            Implicit = new OpenApiOAuthFlow()
-            //            {
-            //                Scopes = new Dictionary<string, string> { { scope, "User access" } },
-            //                AuthorizationUrl = autorizacion,
-            //                TokenUrl = token
-            //            },
-            //        }
-            //    });
-
-            //    document.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("bearer"));
-            //});
         }
     }
 }

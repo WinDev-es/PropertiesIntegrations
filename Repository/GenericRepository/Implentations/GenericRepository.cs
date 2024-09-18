@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Repository.GenericRepository.Interfaces;
 using System.Linq.Expressions;
-using System.Threading;
 
 namespace Repository.GenericRepository.Implentations
 {
