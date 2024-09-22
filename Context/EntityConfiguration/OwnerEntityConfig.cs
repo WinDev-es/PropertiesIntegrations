@@ -42,7 +42,7 @@ namespace Context.EntityConfiguration
                 IdOwner = Guid.Parse(StaticDefination.IdDefaultOwner),
                 Name = StaticDefination.NameDefaultOwner,
                 Address = StaticDefination.AddressDefaultOwner,
-                Birthday = DateTime.Now
+                Birthday = new DateTime(1980, 1, 1)
             });
         }
     }
