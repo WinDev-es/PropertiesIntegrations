@@ -1,14 +1,14 @@
 # InventorySystem App
-# Content
+# Content 
 ________________________________________________
 - [Project description](#Project-description)
 - [Who is this for?](#Who-is-this-for?)
 - [Requirements](#Requirements)
 - [What you will learn](#What-you-will-learn)
  ________________________________________________
- 
- ![arquitectura en capaz orientada al dominio](https://github.com/WinDev-es/InventorySystemV4/assets/62816735/7d2685a1-7bce-4bbc-9400-fbfbfc5ec65c)
 
+ ![image](https://github.com/user-attachments/assets/3a7c88e8-b299-46c2-890e-f8b9dbb53c6c)
+ ![image](https://github.com/user-attachments/assets/eddbcc50-1ada-40b0-91a6-618266443a4f)
 
 
 ## Project description
