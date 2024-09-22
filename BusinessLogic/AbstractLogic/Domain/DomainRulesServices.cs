@@ -7,14 +7,14 @@ using Microsoft.AspNetCore.Http;
 
 namespace BusinessLogic.AbstractLogic.Domain
 {
-    internal static class DomainRulesServices
+    public static class DomainRulesServices
     {
-        internal static async Task<bool> ValidatePropertyNameIdIntoSystem(IEnumerable<PropertyDto> properties, Guid id, string name)
+        public static async Task<bool> ValidatePropertyNameIdIntoSystem(IEnumerable<PropertyDto> properties, Guid id, string name)
         {
             return GenericValidation
                 .ValidateDuplicateNameField(properties, id, name);
         }
-        internal static IEnumerable<DownloadImageDto> ConvertToDownloadImageDtos(IEnumerable<PropertyImage> propertyImages)
+        public static IEnumerable<DownloadImageDto> ConvertToDownloadImageDtos(IEnumerable<PropertyImage> propertyImages)
         {
             return propertyImages
                 .Where(image => image != null)
@@ -33,7 +33,7 @@ namespace BusinessLogic.AbstractLogic.Domain
                     }
                 });
         }
-        internal async static IAsyncEnumerable<LoadImageDto> UpLoadImages(List<IFormFile> files, Guid propertyId)
+        public async static IAsyncEnumerable<LoadImageDto> UpLoadImages(List<IFormFile> files, Guid propertyId)
         {
             if (files is not null && files.Any())
             {
