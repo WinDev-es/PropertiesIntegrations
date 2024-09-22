@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Context\Context.csproj" />
+    <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>
