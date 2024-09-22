@@ -18,6 +18,8 @@
 
         //Default
         public const string IdDefaultOwner = "fba5e3d5-21cb-4f23-b4cb-e66708f8e89d";
+        public const string NameDefaultOwner = "Mr. Afghanistan";
+        public const string AddressDefaultOwner = "Mr. Afghanistan";
 
         // Table Relations
         public const string PropertyRelations = "Owner";

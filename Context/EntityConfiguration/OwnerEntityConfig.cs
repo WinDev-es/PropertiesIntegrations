@@ -40,8 +40,8 @@ namespace Context.EntityConfiguration
             new Owner
             {
                 IdOwner = Guid.Parse(StaticDefination.IdDefaultOwner),
-                Name = "Mr. Afghanistan",
-                Address = "ST AFG False",
+                Name = StaticDefination.NameDefaultOwner,
+                Address = StaticDefination.AddressDefaultOwner,
                 Birthday = DateTime.Now
             });
         }
