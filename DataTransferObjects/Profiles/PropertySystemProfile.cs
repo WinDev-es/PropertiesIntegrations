@@ -5,9 +5,11 @@ using DataTransferObjets.Configuration;
 using DataTransferObjets.Dto.Request;
 using DataTransferObjets.Dto.Response;
 using DataTransferObjets.Entities;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DataTransferObjets.Profiles
 {
+    [ExcludeFromCodeCoverage]
     public class PropertySystemProfile : Profile
     {
         public PropertySystemProfile()

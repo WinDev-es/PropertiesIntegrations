@@ -1,5 +1,8 @@
-﻿namespace DataTransferObjets.Entities
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace DataTransferObjets.Entities
 {
+    [ExcludeFromCodeCoverage] // Hasta que se implemente
     public class PropertyTrace
     {
         public Guid IdPropertyTrace { get; set; }
