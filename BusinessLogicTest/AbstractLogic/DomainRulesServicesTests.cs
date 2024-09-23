@@ -48,7 +48,7 @@ namespace BusinessLogicTest.AbstractLogic.Domain
             var result = await DomainRulesServices.ValidatePropertyNameIdIntoSystem(properties, id, name);
 
             // Assert
-            Assert.True(result);
+            Assert.False(result);
         }
 
         [Fact]

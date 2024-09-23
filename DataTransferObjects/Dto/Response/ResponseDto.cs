@@ -25,13 +25,4 @@ namespace DataTransferObjets.Dto.Response
             };
         }
     }
-
-    //public class ResponseDto<T>
-    //{
-    //    public List<string> Errors { get; set; }
-    //    public string Message { get; set; }
-    //    public HttpStatusCode StatusCode { get; set; }
-    //    public T Data { get; set; }
-    //}
-
 }

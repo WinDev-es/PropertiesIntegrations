@@ -120,6 +120,7 @@ namespace RepositoryTest.SpecificRepository
 
             // Insertar las propiedades
             await unitOfWork.PropertyRepository.Create(property1, CancellationToken.None);
+            await unitOfWork.SaveChangesAsync(CancellationToken.None);
             await unitOfWork.PropertyRepository.Create(property2, CancellationToken.None);
             await unitOfWork.SaveChangesAsync(CancellationToken.None);
 

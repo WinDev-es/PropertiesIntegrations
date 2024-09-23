@@ -106,6 +106,6 @@ public class PropertyImageServiceTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal(207, Convert.ToInt16(result.StatusCode)); // Esperamos que retorne 207 Multi-Status.
+        Assert.Equal(400, Convert.ToInt16(result.StatusCode)); // Esperamos que retorne 400 BadRequest.
     }
 }

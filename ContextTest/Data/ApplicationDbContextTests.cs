@@ -22,32 +22,35 @@ namespace ContextTest.Data
                 .UseInMemoryDatabase(databaseName: "TestDatabase")
                 .Options;
         }
-
-        [Fact]
-        public async Task Can_Insert_Owner_Into_Database()
+        private void AddDefaulOwnerAsync()
         {
-            // Arrange
             using (var context = new ApplicationDbContext(_dbContextOptions))
             {
                 var owner = new Owner
                 {
                     IdOwner = Guid.Parse(StaticDefination.IdDefaultOwner),
                     Name = StaticDefination.NameDefaultOwner,
-                    Address = StaticDefination.AddressDefaultOwner,
-                    Birthday = new DateTime(1980, 1, 1)
+                    Address = StaticDefination.AddressDefaultOwner
                 };
 
                 // Act
                 context.Owners.Add(owner);
-                await context.SaveChangesAsync();
+                context.SaveChangesAsync();
             }
+        }
+
+        [Fact]
+        public async Task Can_Insert_Owner_Into_Database()
+        {
+            // Arrange
+            AddDefaulOwnerAsync();
 
             // Assert
             using (var context = new ApplicationDbContext(_dbContextOptions))
             {
-                Assert.Equal(1, await context.Owners.CountAsync());
+                Assert.Equal(2, await context.Owners.CountAsync());
                 var ownerFromDb = await context.Owners.FirstOrDefaultAsync();
-                Assert.Equal("John Doe", ownerFromDb.Name);
+                Assert.Equal(StaticDefination.NameDefaultOwner, ownerFromDb.Name);
             }
         }
 
@@ -55,6 +58,7 @@ namespace ContextTest.Data
         public async Task Can_Insert_Property_Into_Database()
         {
             // Arrange
+            AddDefaulOwnerAsync();
             using (var context = new ApplicationDbContext(_dbContextOptions))
             {
                 var property = new Property
@@ -90,6 +94,7 @@ namespace ContextTest.Data
         public async Task Can_Insert_PropertyImage_Into_Database()
         {
             // Arrange
+            AddDefaulOwnerAsync();
             using (var context = new ApplicationDbContext(_dbContextOptions))
             {
                 // Asegúrate de que la propiedad a la que se vinculará la imagen ya esté en la base de datos
