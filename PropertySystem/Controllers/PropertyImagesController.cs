@@ -1,12 +1,7 @@
 ﻿using BusinessLogic.Contracts;
-using BusinessLogic.ServicesLogic;
-using Context.Entities;
 using DataTransferObjects.Dto.Request;
-using DataTransferObjets.Dto.Request;
 using DataTransferObjets.Dto.Response;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.Threading;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -59,18 +54,5 @@ public class PropertyImagesController : ControllerBase
         var res = await propertyImageService
             .UploadImageAsync(loadImageDto, cancellationToken);
         return res.ToActionResult();
-    }
-}
-
-
-
-[ApiController]
-[Route("api/[controller]")]
-public class TestController : ControllerBase
-{
-    [HttpGet("throw-exception")]
-    public IActionResult ThrowException()
-    {
-        throw new Exception("This is a test exception");
     }
 }

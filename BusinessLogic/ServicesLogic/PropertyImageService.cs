@@ -7,7 +7,6 @@ using DataTransferObjects.Dto.Response;
 using DataTransferObjects.Dto.System;
 using DataTransferObjets.Configuration;
 using DataTransferObjets.Dto.Response;
-using DataTransferObjets.Entities;
 using Microsoft.AspNetCore.Http;
 using Repository.GenericRepository.Interfaces;
 

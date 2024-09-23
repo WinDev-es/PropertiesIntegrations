@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace DataTransferObjects.Dto.Request
+﻿namespace DataTransferObjects.Dto.Request
 {
     public class PropertyImageDto
     {

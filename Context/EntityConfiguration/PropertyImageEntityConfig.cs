@@ -1,5 +1,4 @@
 ﻿using Context.Entities;
-using DataTransferObjets.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

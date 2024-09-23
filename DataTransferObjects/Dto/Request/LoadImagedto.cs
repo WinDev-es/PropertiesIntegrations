@@ -6,6 +6,5 @@ namespace DataTransferObjects.Dto.Request
     {
         public AddImageDto AddImageDto { get; set; }
         public PropertyImageDto PropertyImageDto { get; set; }
-
     }
 }

@@ -1,11 +1,14 @@
 ﻿using BusinessLogic.Contracts;
 using BusinessLogic.ServicesLogic;
 
-public static class BusinessServicesExtension
+namespace PropertySystem.Extension
 {
-    public static void ResolveServiceLogicDependency(this IServiceCollection services)
+    public static class BusinessServicesExtension
     {
-        services.AddScoped<IPropertyService, PropertyService>();
-        services.AddScoped<IPropertyImageService, PropertyImageService>();
+        public static void ResolveServiceLogicDependency(this IServiceCollection services)
+        {
+            services.AddScoped<IPropertyService, PropertyService>();
+            services.AddScoped<IPropertyImageService, PropertyImageService>();
+        }
     }
 }
