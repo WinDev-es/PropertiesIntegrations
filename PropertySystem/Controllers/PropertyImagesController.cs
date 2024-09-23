@@ -61,3 +61,16 @@ public class PropertyImagesController : ControllerBase
         return res.ToActionResult();
     }
 }
+
+
+
+[ApiController]
+[Route("api/[controller]")]
+public class TestController : ControllerBase
+{
+    [HttpGet("throw-exception")]
+    public IActionResult ThrowException()
+    {
+        throw new Exception("This is a test exception");
+    }
+}

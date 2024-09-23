@@ -27,10 +27,9 @@ namespace BusinessLogic.ServicesLogic
         {
             IEnumerable<PropertyImage?> data = await unitOfWork.PropertyImageRepository.ReadAll(cancellationToken, x => x.IdProperty.Equals(propertyId),
                                                                                                             includeProperties: StaticDefination.PropertyImageRelations);
-
             IEnumerable<DownloadImageDto> downloadImageDtos = DomainRulesServices.ConvertToDownloadImageDtos(data);
 
-            return GenericValidation.IsNotNull(downloadImageDtos) ?
+            return GenericValidation.HasRecords(downloadImageDtos) ?
                 ServiceResponses.SuccessfulResponse200(downloadImageDtos) :
                 ServiceResponses.NotFound404<IEnumerable<DownloadImageDto>>(StaticDefination.NoData);
         }

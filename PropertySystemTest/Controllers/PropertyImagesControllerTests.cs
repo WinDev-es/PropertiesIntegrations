@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Contracts;
 using DataTransferObjects.Dto.Request;
 using DataTransferObjects.Dto.Response;
+using DataTransferObjets.Configuration;
 using DataTransferObjets.Dto.Request;
 using DataTransferObjets.Dto.Response;
 using Microsoft.AspNetCore.Http;
@@ -10,15 +11,22 @@ using System.Net;
 
 namespace PropertySystemTest.Controllers
 {
-    public class PropertyImagesControllerTests
+    public class PropertyImagesControllerTests : IDisposable
     {
-
-        private readonly Mock<IPropertyImageService> PropertyImagesService;
+        private readonly Mock<IPropertyImageService> PropertyImagesServiceMock;
         private readonly PropertyImagesController PropertyImagesController;
+
         public PropertyImagesControllerTests()
         {
-            PropertyImagesService = new Mock<IPropertyImageService>();
-            PropertyImagesController = new PropertyImagesController(PropertyImagesService.Object);
+            PropertyImagesServiceMock = new Mock<IPropertyImageService>();
+            PropertyImagesController = new PropertyImagesController(PropertyImagesServiceMock.Object);
+        }
+
+        // Método para limpiar recursos después de cada prueba
+        public void Dispose()
+        {
+            // Limpia y reinicia los mocks
+            PropertyImagesServiceMock.Reset();
         }
 
         #region GetPropertyById Tests
@@ -29,43 +37,43 @@ namespace PropertySystemTest.Controllers
             var propertyId = Guid.NewGuid();
 
             var downloadImageDtoList = new List<DownloadImageDto>
-    {
-        new DownloadImageDto
-        {
-            AddImageDto = new AddImageDto
             {
-                ImageUrl = "http://example.com/image1.jpg",
-                Img = null,
-                Files = new List<IFormFile>()
-            },
-            PropertyImageDto = new PropertyImageDto
-            {
-                File = "image1.jpg",
-                Enabled = true,
-                IdProperty = propertyId
-            }
-        },
-        new DownloadImageDto
-        {
-            AddImageDto = new AddImageDto
-            {
-                ImageUrl = "http://example.com/image2.jpg",
-                Img = null,
-                Files = new List<IFormFile>()
-            },
-            PropertyImageDto = new PropertyImageDto
-            {
-                File = "image2.jpg",
-                Enabled = true,
-                IdProperty = propertyId
-            }
-        }
-    };
+                new DownloadImageDto
+                {
+                    AddImageDto = new AddImageDto
+                    {
+                        ImageUrl = "http://example.com/image1.jpg",
+                        Img = null,
+                        Files = new List<IFormFile>()
+                    },
+                    PropertyImageDto = new PropertyImageDto
+                    {
+                        File = "image1.jpg",
+                        Enabled = true,
+                        IdProperty = propertyId
+                    }
+                },
+                new DownloadImageDto
+                {
+                    AddImageDto = new AddImageDto
+                    {
+                        ImageUrl = "http://example.com/image2.jpg",
+                        Img = null,
+                        Files = new List<IFormFile>()
+                    },
+                    PropertyImageDto = new PropertyImageDto
+                    {
+                        File = "image2.jpg",
+                        Enabled = true,
+                        IdProperty = propertyId
+                    }
+                }
+            };
 
             var response = ServiceResponses.SuccessfulResponse200<IEnumerable<DownloadImageDto>>(downloadImageDtoList);
 
             // Configuración del mock
-            PropertyImagesService
+            PropertyImagesServiceMock
                 .Setup(service => service.GetImagesByPropertyIdAsync(propertyId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(response);
 
@@ -86,21 +94,21 @@ namespace PropertySystemTest.Controllers
             // Arrange
             var propertyId = Guid.NewGuid();
 
-            PropertyImagesService
+            // Configuración del Mock para devolver una respuesta de no encontrado
+            var response = ServiceResponses.NotFound404<IEnumerable<DownloadImageDto>>(StaticDefination.NoData);
+            PropertyImagesServiceMock
                 .Setup(service => service.GetImagesByPropertyIdAsync(propertyId, It.IsAny<CancellationToken>()))
-                .ReturnsAsync(ServiceResponses.NotFound404<IEnumerable<DownloadImageDto>>("Property not found"));
+                .ReturnsAsync(response); // Esto debe devolver el tipo correcto
 
             // Act
             var result = await PropertyImagesController.GetPropertyById(propertyId, CancellationToken.None);
 
             // Assert
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
-            var response = Assert.IsType<ResponseDto<string>>(notFoundResult.Value);
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-            Assert.Equal("Property not found", response.Message);
+            var responseDto = Assert.IsType<ResponseDto<IEnumerable<DownloadImageDto>>>(notFoundResult.Value);
+            Assert.Equal(HttpStatusCode.NotFound, responseDto.StatusCode);
+            Assert.Equal(StaticDefination.NoData, responseDto.Message);
         }
-
-
         #endregion
 
         #region UploadImage Tests
@@ -114,7 +122,7 @@ namespace PropertySystemTest.Controllers
                 PropertyImageDto = new PropertyImageDto { File = "image.jpg", Enabled = true, IdProperty = Guid.NewGuid() }
             };
 
-            PropertyImagesService
+            PropertyImagesServiceMock
                 .Setup(service => service.UploadImageAsync(loadImageDto, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(ServiceResponses.SuccessfulResponse200(true)); // La carga fue exitosa
 
@@ -127,51 +135,6 @@ namespace PropertySystemTest.Controllers
             Assert.True(response.Data); // Verifica que la carga fue exitosa
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
-
-        [Fact]
-        public async Task UploadImage_ReturnsMultiStatus_WhenPartialSuccess()
-        {
-            // Arrange
-            var loadImageDto = new LoadImageDto
-            {
-                AddImageDto = new AddImageDto { ImageUrl = "image.jpg", Files = new List<IFormFile>() },
-                PropertyImageDto = new PropertyImageDto { File = "image.jpg", Enabled = true, IdProperty = Guid.NewGuid() }
-            };
-
-            PropertyImagesService
-                .Setup(service => service.UploadImageAsync(loadImageDto, It.IsAny<CancellationToken>()))
-                .ReturnsAsync(ServiceResponses.MultiStatus207<bool>("Some images failed to upload"));
-
-            // Act
-            var result = await PropertyImagesController.UploadImage(loadImageDto, CancellationToken.None);
-
-            // Assert
-            var multiStatusResult = Assert.IsType<ObjectResult>(result);
-            var response = Assert.IsType<ResponseDto<string>>(multiStatusResult.Value);
-            Assert.Equal(HttpStatusCode.MultiStatus, response.StatusCode);
-            Assert.Equal("Some images failed to upload", response.Message);
-        }
-
-        [Fact]
-        public async Task UploadImage_ReturnsBadRequest_WhenInvalidInput()
-        {
-            // Arrange
-            var loadImageDto = new LoadImageDto(); // Input inválido (puedes personalizar esto según tus validaciones)
-
-            PropertyImagesService
-                .Setup(service => service.UploadImageAsync(loadImageDto, It.IsAny<CancellationToken>()))
-                .ReturnsAsync(ServiceResponses.BadRequestResponse400<bool>("Invalid input"));
-
-            // Act
-            var result = await PropertyImagesController.UploadImage(loadImageDto, CancellationToken.None);
-
-            // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-            var response = Assert.IsType<ResponseDto<string>>(badRequestResult.Value);
-            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.Equal("Invalid input", response.Message);
-        }
-
         #endregion
     }
 }

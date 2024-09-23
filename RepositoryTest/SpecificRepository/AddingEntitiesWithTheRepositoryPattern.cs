@@ -21,7 +21,7 @@ namespace RepositoryTest.SpecificRepository
         {
             // Configurar el DbContext para usar una base de datos en memoria
             DbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
         }
 

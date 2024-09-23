@@ -70,7 +70,8 @@ namespace BusinessLogic.ServicesLogic
             decimal maxPrice = filterDto.MaxPrice ?? 0;
 
             IEnumerable<Property?> data = await unitOfWork.PropertyRepository.ReadAll(cancellationToken, x => (string.IsNullOrEmpty(filterDto.City) || x.City.Contains(filterDto.City)) &&
-                                                                                        (x.Price >= minPrice && (x.Price <= maxPrice) || minPrice == maxPrice),
+                                                                                        (x.Price >= minPrice && (x.Price <= maxPrice) || minPrice == maxPrice) ||
+                                                                                        (string.IsNullOrEmpty(filterDto.City) && x.Price >= minPrice && maxPrice == 0),
                                                                                         includeProperties: StaticDefination.PropertyRelations);
 
             IEnumerable<PropertyDto> response = mapper.Map<IEnumerable<PropertyDto>>(data);

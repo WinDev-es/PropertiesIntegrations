@@ -19,7 +19,7 @@ namespace ContextTest.Data
         {
             // Configurar el DbContext para usar una base de datos en memoria
             _dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
         }
         private void AddDefaulOwnerAsync()
@@ -48,7 +48,7 @@ namespace ContextTest.Data
             // Assert
             using (var context = new ApplicationDbContext(_dbContextOptions))
             {
-                Assert.Equal(2, await context.Owners.CountAsync());
+                Assert.Equal(1, await context.Owners.CountAsync());
                 var ownerFromDb = await context.Owners.FirstOrDefaultAsync();
                 Assert.Equal(StaticDefination.NameDefaultOwner, ownerFromDb.Name);
             }
