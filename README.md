@@ -5,10 +5,15 @@ ________________________________________________
 - [Who is this for?](#Who-is-this-for?)
 - [Requirements](#Requirements)
 - [What you will learn](#What-you-will-learn)
+- [Technologies Used](#Technologies-Used)
+- [Installation and Configuration Guide](#Installation-and-Configuration-Guide)
+- [Testing and Validation](#Testing-and-Validation)
+- [License and Credits](#License-and-Credits)
  ________________________________________________
 
  ![image](https://github.com/user-attachments/assets/3a7c88e8-b299-46c2-890e-f8b9dbb53c6c)
  ![image](https://github.com/user-attachments/assets/eddbcc50-1ada-40b0-91a6-618266443a4f)
+ ![image](https://github.com/user-attachments/assets/db81a111-be61-4852-ac66-be5d0155580c)
 
 
 ## Project description
@@ -31,3 +36,25 @@ more than 12 months of knowledge of Cv, additionally prior knowledge in addition
 - Authentication and authorization in ASP NET Core
 - ASP NET Core sessions
 - Create APIs and JSON
+
+## Technologies Used
+- .NET 8, Entity Framework Core, C# Language
+- Swagger for API documentation
+- Visual Studio and SQL Server applications
+
+## Installation and Configuration Guide
+- Clone the repository: https://github.com/WinDev-es/PropertiesIntegrations.git
+- Configure the database in appsettings.json
+- Open the PropertiesIntegrations.sln file, when you start in Visual Studio you deploy the PropertySystem Project and open the appsettings.json file and configure your connection string in the ConnectionStrings.DatabaseConnection session
+- Open the package management console, put in the project "Percistence.Context" type "Add-Migration InitialMigration" Run
+- Then type "Update-Database" Run
+- You start Debugging (ctrl +F5)
+
+## Testing and Validation
+- Unit tests performed with xUnit.
+- Integration testing using Postman.
+
+## License and Credits
+- MIT License
+- Credits to Engineer Edelwin Antonio Molleda Marin
+
