@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContextTest.Data
+namespace PropertiesIntegrationsTests.PercisteceContext.Data
 {
     public class ApplicationDbContextTests
     {

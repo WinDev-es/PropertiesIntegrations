@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 
 namespace DataTransferObjets.Dto.Response
 {
+    [ExcludeFromCodeCoverage]
     public class ResponseDto<T>
     {
         public HttpStatusCode StatusCode { get; set; }

@@ -91,7 +91,7 @@ namespace BusinessLogic.ServicesLogic
                     entityDb.Price = requestDto.NewPrice;
                     await unitOfWork.PropertyRepository.Update(id, entityDb, cancellationToken);
                     return GenericValidation.IsGreaterThanZero<bool>(await unitOfWork.SaveChangesAsync(cancellationToken) > 0) ?
-                                ServiceResponses.NoContent204<bool>(string.Empty) :
+                                ServiceResponses.NoContent204<bool>() :
                                 ServiceResponses.BadRequestResponse400<bool>(StaticDefination.NotImplemented);
 
                 }

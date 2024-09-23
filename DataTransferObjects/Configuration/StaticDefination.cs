@@ -1,5 +1,8 @@
-﻿namespace DataTransferObjets.Configuration
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace DataTransferObjets.Configuration
 {
+    [ExcludeFromCodeCoverage]
     public static class StaticDefination
     {
         public const string NameOrigins = "misOrigenes";

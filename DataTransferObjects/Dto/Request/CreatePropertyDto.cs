@@ -1,5 +1,8 @@
-﻿namespace DataTransferObjets.Dto.Request
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace DataTransferObjets.Dto.Request
 {
+    [ExcludeFromCodeCoverage]
     public class CreatePropertyDto
     {
         public required string Name { get; set; }

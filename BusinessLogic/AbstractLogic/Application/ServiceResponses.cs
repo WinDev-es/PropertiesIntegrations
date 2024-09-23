@@ -11,9 +11,9 @@ public static class ServiceResponses
     {
         return new ResponseDto<T>() { StatusCode = HttpStatusCode.Created, Data = responseData };
     }
-    public static ResponseDto<T> NoContent204<T>(string errorMessage)
+    public static ResponseDto<T> NoContent204<T>()
     {
-        return new ResponseDto<T>() { StatusCode = HttpStatusCode.NoContent, Message = errorMessage };
+        return new ResponseDto<T>() { StatusCode = HttpStatusCode.NoContent };
     }
     public static ResponseDto<T> BadRequestResponse400<T>(string errorMessage)
     {

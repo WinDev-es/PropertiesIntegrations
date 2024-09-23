@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Moq;
 using Repository.GenericRepository.Interfaces;
 using System.Linq.Expressions;
-namespace BusinessLogicTest.ServicesLogic
+namespace PropertiesIntegrationsTests.CoreBusinessLogic.ServicesLogic
 {
     public class PropertyImageServiceTests
     {

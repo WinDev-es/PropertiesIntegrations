@@ -6,7 +6,7 @@ using DataTransferObjets.Dto.Response;
 using Microsoft.AspNetCore.Http;
 using Moq;
 
-namespace BusinessLogicTest.AbstractLogic.Domain
+namespace PropertiesIntegrationsTests.CoreBusinessLogic.AbstractLogic.Domain
 {
     public class DomainRulesServicesTests
     {

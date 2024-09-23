@@ -5,13 +5,8 @@ using DataTransferObjets.Entities;
 using Microsoft.EntityFrameworkCore;
 using Repository.GenericRepository.Implentations;
 using Repository.GenericRepository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RepositoryTest.SpecificRepository
+namespace PropertiesIntegrationsTests.PercisteceRepository.SpecificRepository
 {
     public class QueryingEntitiesWithTheRepositoryPattern
     {

@@ -1,5 +1,8 @@
-﻿namespace DataTransferObjects.Dto.System
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace DataTransferObjects.Dto.System
 {
+    [ExcludeFromCodeCoverage]
     public class AzureConfigurations
     {
         public string Instance { get; set; }

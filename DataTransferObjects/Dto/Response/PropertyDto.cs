@@ -1,5 +1,8 @@
-﻿namespace DataTransferObjets.Dto.Response
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace DataTransferObjets.Dto.Response
 {
+    [ExcludeFromCodeCoverage]
     public class PropertyDto
     {
         public Guid IdProperty { get; set; }
