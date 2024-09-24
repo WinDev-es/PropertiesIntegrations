@@ -14,8 +14,9 @@ ________________________________________________
  ![image](https://github.com/user-attachments/assets/3a7c88e8-b299-46c2-890e-f8b9dbb53c6c)
  ![image](https://github.com/user-attachments/assets/eddbcc50-1ada-40b0-91a6-618266443a4f)
  ![image](https://github.com/user-attachments/assets/db81a111-be61-4852-ac66-be5d0155580c)
-
-
+ ![image](https://github.com/user-attachments/assets/83d23d2a-7919-41a7-b59e-5d893077a678)
+ ________________________________________________
+ 
 ## Project description
 This project is a web application to manage RESTful properties, providing a series of endpoints that allow an efficient and flexible administration of both properties and the images associated with them. The microservice architecture is geared towards facilitating CRUD (Create, Read, Update, Delete) operations for properties and their images, as well as advanced queries that allow users to find properties according to specific criteria. 
 
