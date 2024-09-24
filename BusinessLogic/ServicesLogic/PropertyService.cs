@@ -6,7 +6,6 @@ using DataTransferObjets.Dto.Request;
 using DataTransferObjets.Dto.Response;
 using DataTransferObjets.Entities;
 
-//using DataTransferObjets.Entities;
 using Repository.GenericRepository.Interfaces;
 
 namespace BusinessLogic.ServicesLogic
@@ -52,16 +51,20 @@ namespace BusinessLogic.ServicesLogic
             Property entityPropertyUpd = mapper.Map<Property>(propertyDto);
             entityPropertyUpd.IdProperty = id;
             IEnumerable<Property?> data = await unitOfWork.PropertyRepository.ReadAll(cancellationToken, includeProperties: StaticDefination.PropertyRelations);
-            IEnumerable<PropertyDto> responseDb = mapper.Map<IEnumerable<PropertyDto>>(data);
+            if (GenericValidation.IsNotNull(data) && data.Where(w => w.IdProperty == id).Count() == 1)
+            {
+                IEnumerable<PropertyDto> responseDb = mapper.Map<IEnumerable<PropertyDto>>(data);
 
-            if (GenericValidation.IsGreaterThanZero<bool>(await DomainRulesServices.ValidatePropertyNameIdIntoSystem(
-                                                            responseDb, entityPropertyUpd.IdProperty, entityPropertyUpd.Name)))
-                return ServiceResponses.Conflict409<bool>(string.Concat(StaticDefination.ConflictMessage, StaticDefination.Separator, StaticDefination.DuplicateRegistration));
+                if (GenericValidation.IsGreaterThanZero<bool>(await DomainRulesServices.ValidatePropertyNameIdIntoSystem(
+                                                                responseDb, entityPropertyUpd.IdProperty, entityPropertyUpd.Name)))
+                    return ServiceResponses.Conflict409<bool>(string.Concat(StaticDefination.ConflictMessage, StaticDefination.Separator, StaticDefination.DuplicateRegistration));
 
-            await unitOfWork.PropertyRepository.Update(id, entityPropertyUpd, cancellationToken);
-            return GenericValidation.IsGreaterThanZero<bool>(await unitOfWork.SaveChangesAsync(cancellationToken) > 0) ?
-                        ServiceResponses.SuccessfulResponse200<bool>(true) :
-                        ServiceResponses.BadRequestResponse400<bool>(StaticDefination.NotImplemented);
+                await unitOfWork.PropertyRepository.Update(id, entityPropertyUpd, cancellationToken);
+                return GenericValidation.IsGreaterThanZero<bool>(await unitOfWork.SaveChangesAsync(cancellationToken) > 0) ?
+                            ServiceResponses.SuccessfulResponse200<bool>(true) :
+                            ServiceResponses.BadRequestResponse400<bool>(StaticDefination.NotImplemented);
+            }
+            return ServiceResponses.NotFound404<bool>(StaticDefination.NotFoundMessage);
         }
 
         public async Task<ResponseDto<IEnumerable<PropertyDto>>> ListPropertiesAsync(PropertyFilterDto filterDto, CancellationToken cancellationToken)
@@ -100,7 +103,7 @@ namespace BusinessLogic.ServicesLogic
             return ServiceResponses.NotFound404<bool>(StaticDefination.NotFoundMessage);
         }
 
-        public async Task<ResponseDto<bool>> Delete(Guid id, CancellationToken cancellationToken)
+        public async Task<ResponseDto<bool>> DeleteAsync(Guid id, CancellationToken cancellationToken)
         {
             await unitOfWork.PropertyRepository.Delete(id, cancellationToken);
             return GenericValidation.IsGreaterThanZero<bool>(await unitOfWork.SaveChangesAsync(cancellationToken) > 0) ?

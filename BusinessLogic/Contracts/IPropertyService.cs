@@ -11,7 +11,7 @@ namespace BusinessLogic.Contracts
         public Task<ResponseDto<bool>> UpdatePropertyAsync(Guid id, UpdatePropertyDto propertyDto, CancellationToken cancellationToken);
         public Task<ResponseDto<IEnumerable<PropertyDto>>> ListPropertiesAsync(PropertyFilterDto filterDto, CancellationToken cancellationToken);
         public Task<ResponseDto<PropertyDto>> GetPropertyByIdAsync(Guid id, CancellationToken cancellationToken);
-        public Task<ResponseDto<bool>> Delete(Guid id, CancellationToken cancellationToken);
+        public Task<ResponseDto<bool>> DeleteAsync(Guid id, CancellationToken cancellationToken);
         #endregion
     }
 }

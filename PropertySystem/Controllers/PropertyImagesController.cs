@@ -2,6 +2,7 @@
 using DataTransferObjects.Dto.Request;
 using DataTransferObjets.Dto.Response;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -25,7 +26,7 @@ public class PropertyImagesController : ControllerBase
     /// <response code="500">Internal server error if something goes wrong.</response>
     [HttpGet("{propertyId}")]
     [ProducesResponseType(typeof(ResponseDto<IEnumerable<PropertyImageDto>>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ResponseDto<string>), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(ResponseDto<string>), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetPropertyById(Guid propertyId, CancellationToken cancellationToken)
     {
@@ -46,8 +47,8 @@ public class PropertyImagesController : ControllerBase
     /// <response code="500">Internal server error if something goes wrong.</response>
     [HttpPost("upload")]
     [ProducesResponseType(typeof(ResponseDto<bool>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ResponseDto<string>), StatusCodes.Status207MultiStatus)]
-    [ProducesResponseType(typeof(ResponseDto<string>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseDto<LoadImageDto>), StatusCodes.Status207MultiStatus)]
+    [ProducesResponseType(typeof(ResponseDto<bool>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResponseDto<string>), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> UploadImage([FromForm] LoadImageDto loadImageDto, CancellationToken cancellationToken)
     {

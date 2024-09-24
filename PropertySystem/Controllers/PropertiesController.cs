@@ -28,7 +28,7 @@ public class PropertiesController : ControllerBase
     /// <response code="404">If the property is not found.</response>
     [HttpGet("{propertyId}")]
     [ProducesResponseType(typeof(PropertyDto), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetPropertyById(Guid propertyId, CancellationToken cancellationToken)
     {
         var res = await PropertyService
@@ -47,7 +47,7 @@ public class PropertiesController : ControllerBase
     [HttpGet]
     [Route("list-properties")]
     [ProducesResponseType(typeof(IEnumerable<PropertyDto>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> ListProperties([FromQuery] PropertyFilterDto filterDto, CancellationToken cancellationToken)
     {
         var res = await PropertyService
@@ -66,9 +66,9 @@ public class PropertiesController : ControllerBase
     /// <response code="409">If there is a conflict, such as a duplicate property.</response>
     [HttpPost]
     [Route("create-property")]
-    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.Created)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType((int)HttpStatusCode.Conflict)] 
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.Created)]
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.Conflict)] 
     public async Task<IActionResult> CreateProperty([FromBody] CreatePropertyDto propertyDto, CancellationToken cancellationToken)
     {
         var res = await PropertyService
@@ -89,10 +89,10 @@ public class PropertiesController : ControllerBase
     /// <response code="409">If there is a conflict, such as a duplicate property.</response>
     [HttpPut]
     [Route("{propertyId}/update-property")]
-    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    [ProducesResponseType((int)HttpStatusCode.Conflict)] // Aquí se especifica el Conflict 409
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.Conflict)]
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> UpdatePropertyAsync(Guid propertyId, [FromBody] UpdatePropertyDto propertyDto, CancellationToken cancellationToken)
     {
         var res = await PropertyService
@@ -113,10 +113,10 @@ public class PropertiesController : ControllerBase
     /// <response code="409">If there is a conflict, such as a duplicate property.</response>
     [HttpPatch]
     [Route("{propertyId}/change-price")]
-    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    [ProducesResponseType((int)HttpStatusCode.Conflict)] // Aquí se especifica el Conflict 409
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.Conflict)]
+    [ProducesResponseType(typeof(ResponseDto<bool>), (int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> ChangePrice(Guid propertyId, [FromBody] ChangePriceDto changePriceDto, CancellationToken cancellationToken)
     {
         var res = await PropertyService
